@@ -16,13 +16,20 @@ How does your implementation work?
 
 NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
 
-URL: 
+URL: https://github.com/BraisFernandezCaride/programmingtheiot/tree/default
 
 ### UML Design Diagram(s)
 
 NOTE: Include one or more UML designs representing your solution. It's expected each
 diagram you provide will look similar to, but not the same as, its counterpart in the
 book [Programming the IoT](https://learning.oreilly.com/library/view/programming-the-internet/9781492081401/).
+Para la realización de la primera práctica solo se ha instalado las dependencias necesarias en el equipo para poder trabajar en las prácticas posteriores sobre los repositorios de github.
+Lo primero se han clonado los reposiorios de github para poder trabajaar en ellos.
+Fué necesario istalar la consola wsl en el sistema operativo de windows para poder instalar las dependencias.
+Para poder trabajar adecuadamente se creó un entorno virtual en el que se intalaron las dependencias.
+En el caso concreto del proyecto en python se necesitó transladar el path hacia dentro de la carpeta lo cual al pricipio dió muchos problemas. Ya que la guía proporcionada por laa asignatura no estaba actualizada y no funcionaaba adecuadamente. Finalmente la solución fué utilizar el siguiente comando en la consola con wsl: export PYTHONPATH=$PYTHONPATH:/home/brais/programmingtheiot/programmingtheiot/src/main/python:/home/brais/programmingtheiot/programmingtheiot/src/test/python
+El cual translada el path a las dos carpetas de python a la de main y a la de test.
+
 
 
 ### Unit Tests Executed
