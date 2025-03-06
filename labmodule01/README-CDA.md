@@ -23,6 +23,7 @@ URL: https://github.com/BraisFernandezCaride/programmingtheiot/tree/default
 NOTE: Include one or more UML designs representing your solution. It's expected each
 diagram you provide will look similar to, but not the same as, its counterpart in the
 book [Programming the IoT](https://learning.oreilly.com/library/view/programming-the-internet/9781492081401/).
+
 Para la realización de la primera práctica solo se ha instalado las dependencias necesarias en el equipo para poder trabajar en las prácticas posteriores sobre los repositorios de github.
 Lo primero se han clonado los reposiorios de github para poder trabajaar en ellos.
 Fué necesario istalar la consola wsl en el sistema operativo de windows para poder instalar las dependencias.
@@ -38,9 +39,11 @@ NOTE: TA's will execute your unit tests. You only need to list each test case be
 (e.g. ConfigUtilTest, DataUtilTest, etc). Be sure to include all previous tests, too,
 since you need to ensure you haven't introduced regressions.
 
-- 
-- 
-- 
+Los test se han ejecutado en la versión defaut del código con el fin de comprobar que se encontaban instaladas todas las dependencias necesarias y estaba bien exportado el pythonpath
+
+- ConfigUtilTest.py
+- SystemCpuUtillTaskTest.py
+- SystemMemUtillTaskTest.py
 
 ### Integration Tests Executed
 
@@ -49,8 +52,9 @@ some exceptions (such as your cloud connectivity tests). In such cases, they'll 
 your code to ensure it's correct. As for the tests you execute, you only need to list each
 test case below (e.g. SensorSimAdapterManagerTest, DeviceDataManagerTest, etc.)
 
-- 
-- 
-- 
+Los test se han ejecutado en la versión defaut del código con el fin de comprobar que se encontaban instaladas todas las dependencias necesarias y estaba bien exportado el pythonpath
+
+- ConstrainedDeviceAppTest.py
+- SystemPerformanceManagerTest.py
 
 EOF.
