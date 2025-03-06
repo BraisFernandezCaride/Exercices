@@ -12,6 +12,8 @@ What does your implementation do?
 
 How does your implementation work?
 
+Para la realización de la primera práctica solo se ha instalado las dependencias necesarias en el equipo para poder trabajar en las prácticas posteriores sobre los repositorios de github. Lo primero se han clonado los reposiorios de github para poder trabajaar en ellos. Fué necesario istalar la consola wsl en el sistema operativo de windows para poder instalar las dependencias. Para poder trabajar adecuadamente se creó un entorno virtual en el que se intalaron las dependencias. En el caso concreto del proyecto en java se necesitó descargar un comndo de maven para poder ejecutar adecuadamente los test. Para ello se utilizó el siguiente comando en la propia consola de visual studio: mvn install -DskipTests. El cual nos permite ejecutar todos los test de java a excepción de unos pocos paara que no deen error.
+
 ### Code Repository and Branch
 
 NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
