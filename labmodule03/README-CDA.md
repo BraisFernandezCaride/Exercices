@@ -199,8 +199,47 @@ ActuatorAdapterManagerTest.py
 
 8-
 
+El propósito de la clase es centralizar y administrar las interacciones entre los actuadores, sensores y el rendimiento del sistema. La clase se configura con varios parámetros definidos en un archivo de configuración (PiotConfig.props) para permitir un control dinámico de las funciones habilitadas (como el seguimiento del rendimiento del sistema o el control de sensores).
 
+Componentes principales y lógica de implementación
+Configuración del sistema:
 
+Al inicializarse, la clase DeviceDataManager lee desde el archivo de configuración si se debe habilitar el seguimiento del rendimiento del sistema, la recopilación de datos de sensores y la actuación (habilitación de actuadores). Esto se realiza mediante la clase ConfigUtil, que proporciona métodos para obtener configuraciones como booleans o valores flotantes.
+Gestión de módulos internos:
+
+SystemPerformanceManager: Este componente se encarga de rastrear y gestionar el rendimiento del sistema. Si está habilitado, se crea una instancia de este administrador y se le asigna el DeviceDataManager como su "listener" de mensajes. Este administrador es responsable de recopilar datos del rendimiento del sistema, como la utilización de CPU o la memoria disponible.
+SensorAdapterManager: Este módulo se encarga de gestionar los sensores del sistema. Si está habilitado, también se crea y se asigna el DeviceDataManager como listener. Su propósito es gestionar la recopilación de datos de sensores como temperatura, humedad, etc.
+ActuatorAdapterManager: Este componente gestiona los actuadores del sistema, como los sistemas HVAC o humidificadores. El DeviceDataManager se asegura de que los comandos de actuadores recibidos se gestionen correctamente (por ejemplo, si el comando es encender el aire acondicionado).
+Métodos de gestión del sistema:
+
+startManager(): Este método inicia todos los módulos habilitados (rendimiento del sistema, sensores, actuadores). Registra un mensaje de inicio y asegura que todos los módulos se pongan en funcionamiento.
+stopManager(): Similar a startManager(), este método detiene todos los módulos habilitados y registra un mensaje de parada.
+Métodos de manejo de mensajes:
+
+handleActuatorCommandMessage(): Recibe mensajes relacionados con comandos de actuadores. Este método verifica si los datos recibidos son válidos y, si es así, los pasa al ActuatorAdapterManager para que los ejecute. Si los datos son inválidos, el método simplemente los ignora.
+handleActuatorCommandResponse(): Este método maneja las respuestas de los actuadores, asegurándose de que las respuestas se envíen a la capa superior (GDA). Los datos de respuesta se almacenan en un caché local y se transmiten en formato JSON.
+handleIncomingMessage(): Maneja los mensajes entrantes (generalmente de tipo ActuatorData en formato JSON) y puede pasar estos datos a un método de análisis para su procesamiento.
+handleSensorMessage(): Este método recibe datos de los sensores y, opcionalmente, los pasa a un análisis local para tomar decisiones, como encender un actuador si la temperatura es demasiado baja o alta.
+
+Inicialización Mejorada:
+
+Se agregan gestores (managers) para sensores, actuadores, rendimiento del sistema y mensajes.
+Se cargan configuraciones desde ConfigurationManager.
+Se habilita la toma de decisiones local para la activación del HVAC.
+Manejo del Ciclo de Vida:
+
+Métodos start() y stop() para controlar la inicialización y cierre seguro de los gestores.
+Callbacks de Datos:
+
+Métodos para recibir y procesar datos de sensores, actuadores y rendimiento del sistema.
+
+Análisis y Enrutamiento de Datos:
+Filtrado de datos irrelevantes.
+Envío de información procesada a MessageManager.
+Llamado a DecisionManager cuando es necesario tomar decisiones.
+
+Prueba(integración)
+DeviceDataManagerNoCommsTest.py
 
 ### Unit Tests Executed
 
