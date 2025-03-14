@@ -8,7 +8,7 @@ Be sure to implement all the PIOT-CDA-* issues (requirements) listed at [PIOT-IN
 
 1-
 
-Esta modificación introduce y actualiza módulos en Python para manejar datos de sensoores, actuadores y rendimiento del sistema en una arquitectura IoT. Se crean tres clases principales (SensorData, ActuatorData y SystemPerformanceData), todas derivadas de BaseIotData, asegurando una estructura común para manejar y manipular estos datos.
+Esta modificación introduce y actualiza módulos en Python para manejar datos de sensores, actuadores y rendimiento del sistema en una arquitectura IoT. Se crean tres clases principales (SensorData, ActuatorData y SystemPerformanceData), todas derivadas de BaseIotData, asegurando una estructura común para manejar y manipular estos datos.
 
 Descripción:
 
@@ -25,7 +25,7 @@ get/setValue(): Para obtener y modificar el valor del actuador.
 get/setCommand(): Para definir comandos específicos.
 get/setStateData(): Para manejar datos de estado (por ejemplo, mensajes LED).
 setAsResponse(): Marca el dato como una respuesta a un comando.
-_handleUpdateData(): Copia datos dessde otra instancia de ActuatorData.
+_handleUpdateData(): Copia datos desde otra instancia de ActuatorData.
 
 SensorData:
 Representa datos de sensores, con soporte para valores numéricos.
@@ -50,7 +50,7 @@ Pruebas que se ejecutaron (unitarias):
 
 2-
 
-Esta modificación edita el módulo BaseSensorSimTask, que sirve como base para la simuulación de sensores en el sistema IoT. Su función principal es generar datos de sensores, ya sea a partir de un conjunto de datos predefinido (SensorDataSet) o generando valores aleatoorios dentro de un rango definido.
+Esta modificación edita el módulo BaseSensorSimTask, que sirve como base para la simulación de sensores en el sistema IoT. Su función principal es generar datos de sensores, ya sea a partir de un conjunto de datos predefinido (SensorDataSet) o generando valores aleatorios dentro de un rango definido.
 
 Principales cambios
 Se definen constantes para valores mínimos y máximos de los datos generados.
@@ -74,7 +74,7 @@ TemperatureSensorSimTask: Simula un sensor de temperatura.
 
 Cada clase:
 Se inicializa con valores mínimos y máximos específicos, definidos en SensorDataGenerator.
-Puede utilizar un conjunto de datos (dataSet) o generar valoores aleatorios dentro del rango permitido.
+Puede utilizar un conjunto de datos (dataSet) o generar valores aleatorios dentro del rango permitido.
 Hereda la funcionalidad de BaseSensorSimTask, por lo que la implementación es mínima.
 
 Pruebas(unitarias): 
@@ -133,7 +133,7 @@ La implementación de SensorAdapterManager es una clase en Python que se encarga
 SensorAdapterManager es responsable de:
 
 Inicializar y configurar simuladores de sensores según los valores definidos en el archivo de configuración.
-Manejar un programador de tareas (APScheduler) para recoopilar datos de telemetría en intervalos regulares.
+Manejar un programador de tareas (APScheduler) para recopilar datos de telemetría en intervalos regulares.
 Proveer métodos de inicio y detención del proceso de telemetría.
 Interactuar con un listener de mensajes de datos para enviar la telemetría generada.
 Inicialización (__init__ method)
@@ -216,7 +216,7 @@ startManager(): Este método inicia todos los módulos habilitados (rendimiento 
 stopManager(): Similar a startManager(), este método detiene todos los módulos habilitados y registra un mensaje de parada.
 Métodos de manejo de mensajes:
 
-handleActuatorCommandMessage(): Recibe mensajes relacionados con conandos de actuadores. Este método verifica si los datos recibidos son válidos y, si es así, los pasa al ActuatorAdapterManager para que los ejecute. Si los datos son inválidos, el método simplemente los ignora.
+handleActuatorCommandMessage(): Recibe mensajes relacionados con comandos de actuadores. Este método verifica si los datos recibidos son válidos y, si es así, los pasa al ActuatorAdapterManager para que los ejecute. Si los datos son inválidos, el método simplemente los ignora.
 handleActuatorCommandResponse(): Este método maneja las respuestas de los actuadores, asegurándose de que las respuestas se envíen a la capa superior (GDA). Los datos de respuesta se almacenan en un caché local y se transmiten en formato JSON.
 handleIncomingMessage(): Maneja los mensajes entrantes (generalmente de tipo ActuatorData en formato JSON) y puede pasar estos datos a un método de análisis para su procesamiento.
 handleSensorMessage(): Este método recibe datos de los sensores y, opcionalmente, los pasa a un análisis local para tomar decisiones, como encender un actuador si la temperatura es demasiado baja o alta.
