@@ -2,29 +2,18 @@
 
 ## Lab Module 01
 
-Be sure to implement all the PIOT-GDA-* issues (requirements) listed at [PIOT-INF-01-001 - Lab Module 01](https://github.com/orgs/programming-the-iot/projects/1#column-9974937).
+
 
 ### Description
 
-NOTE: Include two full paragraphs describing your implementation approach by answering the questions listed below.
-
-What does your implementation do? 
-
-How does your implementation work?
 
 Para la realización de la primera práctica solo se ha instalado las dependencias necesarias en el equipo para poder trabajar en las prácticas posteriores sobre los repositorios de github. Lo primero se han clonado los reposiorios de github para poder trabajaar en ellos. Fué necesario istalar la consola wsl en el sistema operativo de windows para poder instalar las dependencias. Para poder trabajar adecuadamente se creó un entorno virtual en el que se intalaron las dependencias. En el caso concreto del proyecto en java se necesitó descargar un comndo de maven para poder ejecutar adecuadamente los test. Para ello se utilizó el siguiente comando en la propia consola de visual studio: mvn install -DskipTests. El cual nos permite ejecutar todos los test de java a excepción de unos pocos paara que no deen error.
 
 ### Code Repository and Branch
 
-NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
 
 URL: https://github.com/BraisFernandezCaride/programmingtheiotjava
 
-### UML Design Diagram(s)
-
-NOTE: Include one or more UML designs representing your solution. It's expected each
-diagram you provide will look similar to, but not the same as, its counterpart in the
-book [Programming the IoT](https://learning.oreilly.com/library/view/programming-the-internet/9781492081401/).
 
 
 ### Unit Tests Executed
