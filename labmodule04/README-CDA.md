@@ -2,7 +2,7 @@
 
 ## Lab Module 04
 
-Be sure to implement all the PIOT-CDA-* issues (requirements) listed at [PIOT-INF-04-001 - Lab Module 04](https://github.com/orgs/programming-the-iot/projects/1#column-10488386).
+
 
 ### Description
 
@@ -111,7 +111,6 @@ Prueba(integración):
 
 ### Code Repository and Branch
 
-NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
 
 URL: https://github.com/BraisFernandezCaride/programmingtheiot/tree/lab04
 
