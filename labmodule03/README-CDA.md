@@ -2,7 +2,6 @@
 
 ## Lab Module 03
 
-Be sure to implement all the PIOT-CDA-* issues (requirements) listed at [PIOT-INF-03-001 - Lab Module 03](https://github.com/orgs/programming-the-iot/projects/1#column-10488379).
 
 ### Description
 
@@ -263,8 +262,8 @@ Debe asegurar la conexión entre estos componentes con setDataMessageListener(se
 Prueba(integración)
 - ConstrainedDeviceAppTest.py
 
-Code Repository and Branch
-NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
+
+### Code Repository and Branch
 
 URL: [https://github.com/BraisFernandezCaride/programmingtheiot/tree/lab03](https://github.com/BraisFernandezCaride/programmingtheiot/tree/lab03)
 
