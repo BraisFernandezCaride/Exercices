@@ -14,9 +14,8 @@ How does your implementation work?
 
 ### Code Repository and Branch
 
-NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
 
-URL: 
+URL: https://github.com/BraisFernandezCaride/programmingtheiot/tree/lab06
 
 ### UML Design Diagram(s)
 
