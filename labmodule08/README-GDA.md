@@ -37,6 +37,7 @@ Se estableció una instancia de CoapServerGateway dentro de DeviceDataManager, c
 
 
 2
+
 Se implementaron dos nuevas clases en Java dentro del paquete programmingtheiot.gda.connection.handlers:
 
 UpdateSystemPerformanceResourceHandler
@@ -58,6 +59,7 @@ Ofrecer respuestas apropiadas al cliente CoAP utilizando códigos estándar (CHA
 
 
 3
+
 Se creó una nueva clase Java denominada GetActuatorCommandResourceHandler dentro del paquete programmingtheiot.gda.connection.handlers. Esta clase fue desarrollada con el objetivo de implementar un recurso CoAP observable que permita al GDA notificar al CDA comandos de actuación utilizando la especificación OBSERVE del protocolo CoAP.
 
 El desarrollo de esta clase se basó en la clase GenericCoapResourceHandler, sirviendo como plantilla para mantener consistencia en la arquitectura del sistema. Entre las principales características y objetivos de esta implementación se encuentran:
@@ -76,6 +78,8 @@ Esta implementación sienta las bases para pruebas futuras e integración de fun
 
 
 4
+
+
 
 Se realizaron actualizaciones importantes en las clases CoapServerGateway y DeviceDataManager con el objetivo de mejorar la flexibilidad, modularidad y capacidad de integración del servidor CoAP en la infraestructura del proyecto. A continuación se describen los cambios más relevantes:
 
