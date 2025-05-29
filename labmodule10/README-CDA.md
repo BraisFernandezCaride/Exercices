@@ -2,48 +2,80 @@
 
 ## Lab Module 10
 
-Be sure to implement all the PIOT-CDA-* issues (requirements) listed at [PIOT-INF-10-001 - Lab Module 10](https://github.com/orgs/programming-the-iot/projects/1#column-10488510).
+### Descripción
 
-### Description
+#### 1. Conexiones seguras mediante TLS en `MqttClientConnector`
 
-NOTE: Include two full paragraphs describing your implementation approach by answering the questions listed below.
+La clase `MqttClientConnector` fue modificada para habilitar el soporte de conexiones cifradas TLS con el broker MQTT. Para lograrlo, se agregaron nuevas propiedades al constructor, las cuales leen desde el archivo de configuración si TLS está activado (`ENABLE_CRYPT_KEY`) y cuál es la ruta del archivo de certificado (`CERT_FILE_KEY`).
 
-What does your implementation do? 
+Dentro del método `connectClient()`, se añadió lógica para detectar si TLS debe usarse. En ese caso, se ajusta el puerto del broker y se configura la conexión segura utilizando la librería estándar `ssl`.
 
-How does your implementation work?
+Esta mejora incrementa la seguridad en la comunicación con el broker sin interferir con la funcionalidad existente cuando TLS no está habilitado.
 
-### Code Repository and Branch
+**Pruebas realizadas:**
 
-NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
+- `MqttClientConnectorTest.py` con la configuración por defecto (sin TLS), confirmando que la funcionalidad base se mantiene estable.
 
-URL: 
+---
 
-### UML Design Diagram(s)
+#### 2. Manejo de comandos `ActuatorData` en `DeviceDataManager`
 
-NOTE: Include one or more UML designs representing your solution. It's expected each
-diagram you provide will look similar to, but not the same as, its counterpart in the
-book [Programming the IoT](https://learning.oreilly.com/library/view/programming-the-internet/9781492081401/).
+La interfaz `IDataMessageListener` y la clase `DeviceDataManager` fueron extendidas para permitir la recepción y ejecución de comandos tipo `ActuatorData` enviados desde el GDA (Gateway Device Application).
 
+Se definió un nuevo método `handleActuatorCommandMessage()` como parte del contrato de la interfaz. Esta función fue implementada en `DeviceDataManager`, donde los mensajes se validan y se reenvían al adaptador de actuadores (`actuatorAdapterMgr`) para su ejecución.
 
-### Unit Tests Executed
+Con esta adición, el CDA es ahora capaz de reaccionar a comandos de control remoto, mejorando la capacidad de automatización del sistema.
 
-NOTE: TA's will execute your unit tests. You only need to list each test case below
-(e.g. ConfigUtilTest, DataUtilTest, etc). Be sure to include all previous tests, too,
-since you need to ensure you haven't introduced regressions.
+**Pruebas realizadas:**
 
-- 
-- 
-- 
+- `DeviceDataManagerCallbackTest.py` sin dependencias de red, confirmando la correcta recepción y manejo de comandos de actuación.
 
-### Integration Tests Executed
+---
 
-NOTE: TA's will execute most of your integration tests using their own environment, with
-some exceptions (such as your cloud connectivity tests). In such cases, they'll review
-your code to ensure it's correct. As for the tests you execute, you only need to list each
-test case below (e.g. SensorSimAdapterManagerTest, DeviceDataManagerTest, etc.)
+#### 3. Suscripción y manejo de comandos MQTT en `MqttClientConnector`
 
-- 
-- 
-- 
+Se incorporó la capacidad de suscribirse a tópicos de comandos enviados desde el GDA mediante MQTT. Esta funcionalidad permite recibir instrucciones de actuación y redirigirlas hacia un listener registrado.
+
+**Cambios principales:**
+
+- Suscripción al tópico de comandos dentro del método `onConnect`.
+- Implementación de `onActuatorCommandMessage()` para transformar mensajes MQTT en objetos `ActuatorData`.
+- Inclusión del método `setDataMessageListener()` para establecer el listener adecuado.
+- Eliminación de un posible bloqueo en `publishMessage()` comentando `msgInfo.wait_for_publish()`.
+
+Este conjunto de mejoras facilita una interacción en tiempo real entre el GDA y el CDA mediante mensajes MQTT.
+
+---
+
+#### 4. Transmisión de datos desde `DeviceDataManager` hacia el GDA
+
+El envío de datos al GDA se habilitó desde `DeviceDataManager`, permitiendo que información tanto de sensores como de rendimiento del sistema llegue al GDA utilizando MQTT o CoAP, según lo configurado.
+
+**Actualizaciones destacadas:**
+
+- Creación del método `_handleUpstreamTransmission()` encargado de transmitir los datos en formato JSON al GDA utilizando el protocolo definido.
+- Integración de este nuevo método dentro de `handleSensorMessage()` y `handleSystemPerformanceMessage()`, centralizando la lógica de transmisión.
+- Análisis continuo de datos de temperatura en `_handleSensorDataAnalysis()`, generando comandos de actuación cuando se superan umbrales definidos.
+
+**Pruebas realizadas:**
+
+- `testDeviceDataMgrTimedIntegration.py` con datos del emulador SenseHAT y un broker MQTT local, validando tanto la transmisión como la activación de eventos automáticos de actuación.
+
+---
+
+### Repositorio y Rama
+
+**URL:**  
+[https://github.com/BraisFernandezCaride/programmingtheiot/tree/lab10.4](https://github.com/BraisFernandezCaride/programmingtheiot/tree/lab10.4)
+
+---
+
+### Pruebas de Integración Ejecutadas
+
+- `DeviceDataManagerWithCommsTest.py`  
+- `DeviceDataManagerCallbackTest.py`  
+- `MqttClientConnectorTest.py`
+
+---
 
 EOF.
