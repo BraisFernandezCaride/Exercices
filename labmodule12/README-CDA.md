@@ -1,49 +1,68 @@
-# Constrained Device Application (Connected Devices)
+
 
 ## Lab Module 12 - Semester Project - CDA Components
 
-Be sure to implement all the PIOT-CDA-* issues (requirements) listed at [PIOT-INF-12-001 - Lab Module 12](https://github.com/orgs/programming-the-iot/projects/1#column-10488565).
+
 
 ### Description
 
-NOTE: Include two full paragraphs describing your implementation approach by answering the questions listed below.
+#  Integración del Sensor de Humo en el CDA (Constrained Device Application)
 
-What does your implementation do? 
+##  Objetivo
 
-How does your implementation work?
+El objetivo de esta implementación es extender el sistema del *Constrained Device Application (CDA)* con soporte para un nuevo tipo de sensor: el **sensor de humo**. Esta mejora forma parte del Lab 12 del proyecto *Programming the Internet of Things*, donde se busca simular o emular sensores ambientales en un entorno IoT distribuido.
+
+---
+
+##  Archivos Creados
+
+Para habilitar la integración del sensor de humo, se crearon y modificaron los siguientes archivos:
+
+### 1. `SmokeSensorSimTask.py`
+- **Ubicación**: `programmingtheiot/cda/sim/`
+- **Funcionalidad**: Clase encargada de simular un sensor de humo, generando valores dentro de un rango configurable.
+- **Salida**: Simula lecturas porcentuales de concentración de humo en el ambiente.
+
+### 2. `SmokeSensorEmulatorTask.py`
+- **Ubicación**: `programmingtheiot/cda/emulated/`
+- **Funcionalidad**: Emulador del sensor de humo para el modo de ejecución emulado, generando valores en tiempo real mediante lógica programada.
+
+### 3. Modificación en `SensorDataGenerator.py`
+- **Ubicación**: `programmingtheiot/cda/sim/`
+- **Funcionalidad añadida**: Se incluyó un nuevo método para generar datasets diarios simulados de humo.
+
+### 4. Modificación en `ConfigConst.py`
+- **Ubicación**: `programmingtheiot/common/`
+- **Constante añadida**: `SMOKE_SENSOR_TYPE`
+- **Propósito**: Representar e identificar el tipo de sensor de humo en el sistema.
+
+---
+
+##  Cambios en Código Existente
+
+### Archivo: `SensorAdapterManager.py`
+- **Ubicación**: `programmingtheiot/cda/app/`
+
+#### Cambios realizados:
+- Se importó el nuevo módulo `SmokeSensorSimTask`.
+- En el método `_initEnvironmentalSensorTasks`:
+  - Se añadió la obtención de los valores de configuración para el humo (`smoke.simFloor` y `smoke.simCeiling`).
+  - Se generó un dataset de simulación usando `SensorDataGenerator`.
+  - Se creó una instancia de `SmokeSensorSimTask` para el modo simulado.
+  - Se agregó la carga e instancia de `SmokeSensorEmulatorTask` para el modo emulado.
+- En el método `handleTelemetry`:
+  - Se generó y manejó una lectura del sensor de humo como parte del flujo de telemetría, enviándola mediante el `IDataMessageListener`.
+
+---
 
 ### Code Repository and Branch
 
-NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
 
 URL: 
 
-### UML Design Diagram(s)
-
-NOTE: Include one or more UML designs representing your solution. It's expected each
-diagram you provide will look similar to, but not the same as, its counterpart in the
-book [Programming the IoT](https://learning.oreilly.com/library/view/programming-the-internet/9781492081401/).
 
 
-### Unit Tests Executed
 
-NOTE: TA's will execute your unit tests. You only need to list each test case below
-(e.g. ConfigUtilTest, DataUtilTest, etc). Be sure to include all previous tests, too,
-since you need to ensure you haven't introduced regressions.
 
-- 
-- 
-- 
-
-### Integration Tests Executed
-
-NOTE: TA's will execute most of your integration tests using their own environment, with
-some exceptions (such as your cloud connectivity tests). In such cases, they'll review
-your code to ensure it's correct. As for the tests you execute, you only need to list each
-test case below (e.g. SensorSimAdapterManagerTest, DeviceDataManagerTest, etc.)
-
-- 
-- 
-- 
 
 EOF.
